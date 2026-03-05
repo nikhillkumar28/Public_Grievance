@@ -88,7 +88,7 @@ Expected response:
 }
 ```
 
-If ML service is unavailable, backend falls back to `General / Medium / 0`.
+If ML service is unavailable, the backend falls back to `General / Medium / 0`.
 
 ## Escalation Job
 
@@ -96,4 +96,4 @@ Runs daily at `02:00` server time:
 - Finds complaints where `status = pending`
 - `createdAt <= 7 days old`
 - `upvotes >= UPVOTE_ESCALATION_THRESHOLD`
-- Updates status to `escalated` and appends timeline entry
+- Updates status to `escalated` and appends timeline entry.
