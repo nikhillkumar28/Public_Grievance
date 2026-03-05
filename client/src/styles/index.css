@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color: #10213a;
+  background-color: #f8fafc;
+  font-family: "Source Sans 3", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  margin: 0;
+}
+
+.hero-bg {
+  background: radial-gradient(circle at 20% 10%, #dbeafe, transparent 40%),
+    radial-gradient(circle at 80% 30%, #dcfce7, transparent 35%),
+    linear-gradient(130deg, #f8fafc 0%, #eef5ff 45%, #f4fbf7 100%);
+}
+
+.status-card {
+  @apply rounded-xl border border-slate-200 bg-white p-5 shadow-civic;
+}
