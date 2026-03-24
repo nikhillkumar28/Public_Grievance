@@ -6,6 +6,7 @@ import CitizenTopbar from "./components/layout/CitizenTopbar";
 import HomePage from "./pages/public/HomePage";
 import LoginPage from "./pages/public/LoginPage";
 import RegisterPage from "./pages/public/RegisterPage";
+import UnauthorizedPage from "./pages/public/UnauthorizedPage";
 import AboutPage from "./pages/public/AboutPage";
 import CitizenDashboardPage from "./pages/citizen/CitizenDashboardPage";
 import FileComplaintPage from "./pages/citizen/FileComplaintPage";
@@ -13,6 +14,8 @@ import MyComplaintsPage from "./pages/citizen/MyComplaintsPage";
 import UpvotedIssuesPage from "./pages/citizen/UpvotedIssuesPage";
 import ProfileSettingsPage from "./pages/citizen/ProfileSettingsPage";
 import ComplaintDetailsPage from "./pages/citizen/ComplaintDetailsPage";
+import AdminDashboard from "./pages/AdminDashboard";
+import AuthorityDashboard from "./pages/AuthorityDashboard";
 import { useAuth } from "./context/AuthContext";
 
 const PublicLayout = () => (
@@ -48,17 +51,27 @@ export default function App() {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/unauthorized" element={<UnauthorizedPage />} />
       </Route>
 
       <Route element={<PrivateRoute roles={["citizen"]} />}>
         <Route element={<CitizenLayout />}>
           <Route path="/citizen" element={<CitizenDashboardPage />} />
+          <Route path="/citizen/dashboard" element={<CitizenDashboardPage />} />
           <Route path="/citizen/file-complaint" element={<FileComplaintPage />} />
           <Route path="/citizen/my-complaints" element={<MyComplaintsPage />} />
           <Route path="/citizen/upvoted-issues" element={<UpvotedIssuesPage />} />
           <Route path="/citizen/profile" element={<ProfileSettingsPage />} />
           <Route path="/citizen/complaints/:id" element={<ComplaintDetailsPage />} />
         </Route>
+      </Route>
+
+      <Route element={<PrivateRoute roles={["authority", "admin"]} />}>
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
+      </Route>
+
+      <Route element={<PrivateRoute roles={["authority"]} />}>
+        <Route path="/authority/dashboard" element={<AuthorityDashboard />} />
       </Route>
 
       <Route path="*" element={<Navigate to="/" replace />} />

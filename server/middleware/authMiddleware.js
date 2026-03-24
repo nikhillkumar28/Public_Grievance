@@ -1,5 +1,4 @@
 const jwt = require("jsonwebtoken");
-const User = require("../models/User");
 
 const JWT_SECRET = process.env.JWT_SECRET || "local_dev_jwt_secret_change_me";
 
@@ -12,13 +11,12 @@ const authMiddleware = async (req, res, next) => {
 
     const token = authHeader.split(" ")[1];
     const decoded = jwt.verify(token, JWT_SECRET);
-    const user = await User.findById(decoded.id).select("-password");
-
-    if (!user) {
-      return res.status(401).json({ message: "Unauthorized: user not found" });
-    }
-
-    req.user = user;
+    const id = decoded.userId || decoded.id;
+    req.user = {
+      id,
+      _id: id,
+      role: decoded.role
+    };
     next();
   } catch (error) {
     return res.status(401).json({ message: "Unauthorized: invalid token" });

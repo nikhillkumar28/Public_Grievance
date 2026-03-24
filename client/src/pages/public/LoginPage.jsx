@@ -12,7 +12,9 @@ export default function LoginPage() {
     e.preventDefault();
     try {
       const data = await login(form);
-      if (data.user.role === "citizen") navigate("/citizen");
+      if (data.user.role === "citizen") navigate("/citizen/dashboard");
+      else if (data.user.role === "authority") navigate("/authority/dashboard");
+      else if (data.user.role === "admin") navigate("/admin/dashboard");
       else navigate("/");
     } catch (err) {
       setError(err.response?.data?.message || "Login failed");
@@ -22,7 +24,7 @@ export default function LoginPage() {
   return (
     <main className="mx-auto max-w-md px-6 py-12">
       <h1 className="text-2xl font-bold text-civic-navy">Login</h1>
-      <form onSubmit={handleSubmit} className="mt-6 space-y-4 rounded-xl border border-slate-200 bg-white p-6 shadow-civic">
+      <form onSubmit={handleSubmit} className="mx-auto mt-6 space-y-4 rounded-xl border border-slate-200 bg-white p-6 shadow-lg">
         <input
           className="w-full rounded-md border border-slate-300 px-3 py-2"
           type="email"

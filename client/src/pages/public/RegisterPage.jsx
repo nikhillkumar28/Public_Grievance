@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
+import { registerApi } from "../../api/authApi";
 
 export default function RegisterPage() {
-  const { register } = useAuth();
   const navigate = useNavigate();
   const [form, setForm] = useState({ name: "", email: "", password: "", ward: "" });
   const [error, setError] = useState("");
@@ -11,8 +10,8 @@ export default function RegisterPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await register({ ...form, role: "citizen" });
-      navigate("/citizen");
+      await registerApi(form);
+      navigate("/login");
     } catch (err) {
       setError(err.response?.data?.message || "Registration failed");
     }
@@ -21,7 +20,7 @@ export default function RegisterPage() {
   return (
     <main className="mx-auto max-w-md px-6 py-12">
       <h1 className="text-2xl font-bold text-civic-navy">Register</h1>
-      <form onSubmit={handleSubmit} className="mt-6 space-y-4 rounded-xl border border-slate-200 bg-white p-6 shadow-civic">
+      <form onSubmit={handleSubmit} className="mx-auto mt-6 space-y-4 rounded-xl border border-slate-200 bg-white p-6 shadow-lg">
         <input
           className="w-full rounded-md border border-slate-300 px-3 py-2"
           type="text"

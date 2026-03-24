@@ -4,6 +4,7 @@ import { Bar, BarChart, Cell, ResponsiveContainer, Tooltip, XAxis, YAxis } from 
 import { fetchActiveAdvisories, fetchPublicOverview, fetchRecentComplaints } from "../../api/publicApi";
 import ComplaintCard from "../../components/shared/ComplaintCard";
 import TrendingComplaints from "../../components/TrendingComplaints";
+import ComplaintHeatmap from "../../components/ComplaintHeatmap";
 
 const chartColors = ["#b42318", "#d97706", "#1f7a4c", "#7f1d1d"];
 
@@ -83,6 +84,8 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <ComplaintHeatmap />
 
       <TrendingComplaints />
 

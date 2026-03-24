@@ -3,7 +3,7 @@ const fs = require("fs");
 const path = require("path");
 const multer = require("multer");
 const authMiddleware = require("../middleware/authMiddleware");
-const roleMiddleware = require("../middleware/roleMiddleware");
+const { authorizeRoles } = require("../middleware/roleMiddleware");
 const {
   createComplaint,
   listComplaints,
@@ -42,10 +42,12 @@ router.get("/public/overview", getPublicOverview);
 router.get("/public/recent", getPublicRecent);
 router.get("/trending", getTrendingComplaints);
 
-router.post("/", authMiddleware, roleMiddleware("citizen", "admin"), imageUpload.single("image"), createComplaint);
-router.get("/", authMiddleware, listComplaints);
-router.get("/:id", authMiddleware, getComplaintById);
-router.patch("/:id/status", authMiddleware, roleMiddleware("authority", "admin"), updateComplaintStatus);
-router.patch("/:id/upvote", authMiddleware, roleMiddleware("citizen", "admin"), upvoteComplaint);
+router.use(authMiddleware, authorizeRoles("citizen"));
+
+router.post("/", imageUpload.single("image"), createComplaint);
+router.get("/", listComplaints);
+router.get("/:id", getComplaintById);
+router.patch("/:id/status", updateComplaintStatus);
+router.patch("/:id/upvote", upvoteComplaint);
 
 module.exports = router;

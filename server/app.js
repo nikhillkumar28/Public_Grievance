@@ -9,6 +9,8 @@ const startEscalationJob = require("./jobs/escalationJob");
 
 const authRoutes = require("./routes/authRoutes");
 const complaintRoutes = require("./routes/complaintRoutes");
+const authorityRoutes = require("./routes/authorityRoutes");
+const adminRoutes = require("./routes/adminRoutes");
 const advisoryRoutes = require("./routes/advisoryRoutes");
 const analyticsRoutes = require("./routes/analyticsRoutes");
 
@@ -23,6 +25,8 @@ app.get("/health", (_req, res) => res.status(200).json({ status: "ok" }));
 
 app.use("/api/auth", authRoutes);
 app.use("/api/complaints", complaintRoutes);
+app.use("/api/authority", authorityRoutes);
+app.use("/api/admin", adminRoutes);
 app.use("/api/advisories", advisoryRoutes);
 app.use("/api/analytics", analyticsRoutes);
 
