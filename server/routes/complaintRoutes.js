@@ -8,6 +8,7 @@ const {
   createComplaint,
   listComplaints,
   getPublicOverview,
+  getPublicImpact,
   getTrendingComplaints,
   getPublicRecent,
   getComplaintById,
@@ -39,6 +40,7 @@ const imageUpload = multer({
 });
 
 router.get("/public/overview", getPublicOverview);
+router.get("/public/impact", getPublicImpact);
 router.get("/public/recent", getPublicRecent);
 router.get("/trending", getTrendingComplaints);
 

@@ -19,7 +19,7 @@ pnpm-debug.log*
 # build output
 dist/
 build/
-client/dist/
+client/dist/igma-level UI design blueprint
 coverage/
 
 # runtime/generated

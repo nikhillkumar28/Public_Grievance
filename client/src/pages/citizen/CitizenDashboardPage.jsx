@@ -25,8 +25,8 @@ export default function CitizenDashboardPage() {
   );
 
   return (
-    <div className="space-y-5">
-      <section className="grid gap-4 md:grid-cols-4">
+    <div className="space-y-6">
+      <section className="grid gap-6 md:grid-cols-4">
         {stats.map((item) => (
           <div key={item.label} className="status-card">
             <p className="text-sm text-slate-500">{item.label}</p>
@@ -36,12 +36,12 @@ export default function CitizenDashboardPage() {
       </section>
 
       {warningComplaint && (
-        <div className="rounded-xl border border-amber-300 bg-amber-50 p-4 text-sm text-amber-900">
+        <div className="rounded-xl border border-amber-300 bg-amber-50 p-5 text-sm text-amber-900">
           Your complaint will escalate in 2 days if not addressed.
         </div>
       )}
 
-      <section className="rounded-xl border border-slate-200 bg-white p-5 shadow-civic">
+      <section className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
         <h2 className="mb-4 text-lg font-bold text-civic-navy">My Recent Complaints</h2>
         <div className="space-y-3">
           {complaints.slice(0, 5).map((complaint) => (
@@ -63,3 +63,4 @@ export default function CitizenDashboardPage() {
     </div>
   );
 }
+

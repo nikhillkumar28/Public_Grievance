@@ -3,7 +3,7 @@ import { useAuth } from "../../context/AuthContext";
 export default function CitizenTopbar() {
   const { user, logout } = useAuth();
   return (
-    <div className="mb-4 flex items-center justify-between rounded-xl border border-slate-200 bg-white p-4 shadow-civic">
+    <div className="mb-4 flex items-center justify-between rounded-2xl border border-slate-200 bg-white p-5 shadow-civic">
       <div>
         <p className="text-sm text-slate-500">Welcome</p>
         <p className="font-semibold text-civic-navy">{user?.name || "Citizen"}</p>
@@ -14,3 +14,4 @@ export default function CitizenTopbar() {
     </div>
   );
 }
+

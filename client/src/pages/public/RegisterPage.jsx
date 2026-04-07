@@ -20,7 +20,7 @@ export default function RegisterPage() {
   return (
     <main className="mx-auto max-w-md px-6 py-12">
       <h1 className="text-2xl font-bold text-civic-navy">Register</h1>
-      <form onSubmit={handleSubmit} className="mx-auto mt-6 space-y-4 rounded-xl border border-slate-200 bg-white p-6 shadow-lg">
+      <form onSubmit={handleSubmit} className="mx-auto mt-6 space-y-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-lg">
         <input
           className="w-full rounded-md border border-slate-300 px-3 py-2"
           type="text"
@@ -61,3 +61,4 @@ export default function RegisterPage() {
     </main>
   );
 }
+

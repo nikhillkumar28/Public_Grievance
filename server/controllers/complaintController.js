@@ -125,6 +125,71 @@ const getPublicRecent = async (_req, res) => {
   }
 };
 
+const getPublicImpact = async (_req, res) => {
+  try {
+    const totalComplaints = await Complaint.countDocuments();
+    const categorizedComplaints = await Complaint.countDocuments({
+      category: { $nin: [null, "", "Uncategorized"] }
+    });
+
+    const categorizedPercent = totalComplaints
+      ? Math.round((categorizedComplaints / totalComplaints) * 100)
+      : 0;
+
+    const resolutionAgg = await Complaint.aggregate([
+      { $match: { status: "resolved" } },
+      {
+        $project: {
+          createdAt: 1,
+          resolvedAt: {
+            $let: {
+              vars: {
+                resolvedTimeline: {
+                  $filter: {
+                    input: "$timeline",
+                    as: "item",
+                    cond: { $eq: ["$$item.status", "resolved"] }
+                  }
+                }
+              },
+              in: {
+                $ifNull: [{ $arrayElemAt: ["$$resolvedTimeline.updatedAt", -1] }, "$updatedAt"]
+              }
+            }
+          }
+        }
+      },
+      {
+        $project: {
+          resolutionMs: { $subtract: ["$resolvedAt", "$createdAt"] }
+        }
+      },
+      {
+        $group: {
+          _id: null,
+          avgResolutionMs: { $avg: "$resolutionMs" },
+          resolvedCount: { $sum: 1 }
+        }
+      }
+    ]);
+
+    const avgResolutionMs = resolutionAgg[0]?.avgResolutionMs || 0;
+    const avgResolutionDays = avgResolutionMs ? Math.round((avgResolutionMs / (1000 * 60 * 60 * 24)) * 10) / 10 : 0;
+
+    const duplicateReductionPercent = Number(process.env.DUPLICATE_REDUCTION_ESTIMATE || 30);
+
+    return res.status(200).json({
+      totalComplaints,
+      categorizedPercent,
+      duplicateReductionPercent,
+      avgResolutionDays,
+      isDuplicateReductionEstimated: true
+    });
+  } catch (error) {
+    return res.status(500).json({ message: "Failed to fetch public impact", error: error.message });
+  }
+};
+
 const getComplaintById = async (req, res) => {
   try {
     const complaint = await Complaint.findById(req.params.id);
@@ -189,6 +254,7 @@ module.exports = {
   createComplaint,
   listComplaints,
   getPublicOverview,
+  getPublicImpact,
   getTrendingComplaints,
   getPublicRecent,
   getComplaintById,

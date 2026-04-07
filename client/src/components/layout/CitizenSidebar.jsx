@@ -10,7 +10,7 @@ const menu = [
 
 export default function CitizenSidebar() {
   return (
-    <aside className="w-full rounded-xl border border-slate-200 bg-white p-4 shadow-civic md:w-64">
+    <aside className="w-full rounded-2xl border border-slate-200 bg-white p-5 shadow-civic md:w-[240px]">
       <div className="mb-4 text-sm font-bold text-civic-navy">Citizen Workspace</div>
       <div className="space-y-1">
         {menu.map((item) => (
@@ -29,3 +29,4 @@ export default function CitizenSidebar() {
     </aside>
   );
 }
+

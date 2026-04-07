@@ -5,13 +5,13 @@ export default {
     extend: {
       colors: {
         civic: {
-          navy: "#0f2747",
-          blue: "#1d4ed8",
-          sky: "#eaf2ff",
-          green: "#1f7a4c",
-          amber: "#d97706",
-          red: "#b42318",
-          slate: "#f8fafc"
+          navy: "#1f2937",
+          blue: "#2563eb",
+          sky: "#eff6ff",
+          green: "#22c55e",
+          amber: "#eab308",
+          red: "#ef4444",
+          slate: "#f9fafb"
         }
       },
       boxShadow: {

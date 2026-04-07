@@ -27,7 +27,7 @@ const PublicLayout = () => (
 );
 
 const CitizenLayout = () => (
-  <main className="mx-auto flex max-w-7xl flex-col gap-4 px-6 py-6 md:flex-row">
+  <main className="mx-auto flex max-w-[1280px] flex-col gap-6 px-6 py-6 md:flex-row">
     <CitizenSidebar />
     <section className="flex-1">
       <CitizenTopbar />

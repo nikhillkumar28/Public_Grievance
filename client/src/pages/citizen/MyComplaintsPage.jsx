@@ -21,7 +21,7 @@ export default function MyComplaintsPage() {
   }, [complaints, filters]);
 
   return (
-    <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-civic">
+    <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-civic">
       <h1 className="text-xl font-bold text-civic-navy">My Complaints</h1>
       <div className="mt-4 grid gap-3 md:grid-cols-3">
         <select className="rounded-md border border-slate-300 px-3 py-2" onChange={(e) => setFilters({ ...filters, status: e.target.value })}>
@@ -64,3 +64,4 @@ export default function MyComplaintsPage() {
     </div>
   );
 }
+
