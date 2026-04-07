@@ -1,4 +1,4 @@
-# AI-Powered Public Grievance Platform
+# Smart Public Grievance Platform
 
 Node.js + Express + MongoDB backend plus React + Vite frontend for complaint filing, ML-based categorization, advisory management, analytics, duplicate detection, and escalation workflow.
 
