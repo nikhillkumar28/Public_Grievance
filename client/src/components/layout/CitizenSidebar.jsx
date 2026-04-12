@@ -1,7 +1,8 @@
 import { NavLink } from "react-router-dom";
 
 const menu = [
-  { label: "Dashboard", to: "/citizen" },
+  { label: "Home", to: "/", end: true },
+  { label: "Dashboard", to: "/citizen/dashboard" },
   { label: "File Complaint", to: "/citizen/file-complaint" },
   { label: "My Complaints", to: "/citizen/my-complaints" },
   { label: "Upvoted Issues", to: "/citizen/upvoted-issues" },
@@ -17,7 +18,7 @@ export default function CitizenSidebar() {
           <NavLink
             key={item.to}
             to={item.to}
-            end={item.to === "/citizen"}
+            end={item.end ?? item.to === "/citizen/dashboard"}
             className={({ isActive }) =>
               `block rounded-md px-3 py-2 text-sm ${isActive ? "bg-civic-blue text-white" : "text-slate-700 hover:bg-slate-100"}`
             }

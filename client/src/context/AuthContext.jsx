@@ -11,10 +11,19 @@ const initialUser = (() => {
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(initialUser);
 
+  const updateUser = (nextUser) => {
+    if (!nextUser) {
+      localStorage.removeItem("user");
+      setUser(null);
+      return;
+    }
+    localStorage.setItem("user", JSON.stringify(nextUser));
+    setUser(nextUser);
+  };
+
   const saveAuth = (data) => {
     localStorage.setItem("token", data.token);
-    localStorage.setItem("user", JSON.stringify(data.user));
-    setUser(data.user);
+    updateUser(data.user);
   };
 
   const login = async (payload) => {
@@ -35,7 +44,7 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
   };
 
-  const value = useMemo(() => ({ user, login, register, logout }), [user]);
+  const value = useMemo(() => ({ user, login, register, logout, updateUser }), [user]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

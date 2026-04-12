@@ -19,11 +19,13 @@ import AuthorityDashboard from "./pages/AuthorityDashboard";
 import { useAuth } from "./context/AuthContext";
 
 const PublicLayout = () => (
-  <>
+  <div className="flex min-h-screen flex-col">
     <PublicNavbar />
-    <Outlet />
+    <div className="flex-1">
+      <Outlet />
+    </div>
     <PublicFooter />
-  </>
+  </div>
 );
 
 const CitizenLayout = () => (

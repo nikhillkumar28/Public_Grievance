@@ -12,6 +12,7 @@ export default function FileComplaintPage() {
   const { showToast } = useToast();
   const [form, setForm] = useState({
     description: "",
+    address: "",
     ward: "",
     image: null
   });
@@ -27,13 +28,14 @@ export default function FileComplaintPage() {
     try {
       const formData = new FormData();
       formData.append("description", form.description);
+      formData.append("address", form.address);
       formData.append("ward", form.ward);
       if (form.image) {
         formData.append("image", form.image);
       }
       const data = await createComplaintApi(formData);
       setResult(data);
-      setForm({ description: "", ward: "", image: null });
+      setForm({ description: "", address: "", ward: "", image: null });
     } catch (err) {
       setError(err.response?.data?.message || "Failed to file complaint");
     }
@@ -86,6 +88,13 @@ export default function FileComplaintPage() {
           placeholder="Describe the issue"
           value={form.description}
           onChange={(e) => setForm({ ...form, description: e.target.value })}
+          required
+        />
+        <input
+          className="w-full rounded-md border border-slate-300 px-3 py-2"
+          placeholder="Address / Landmark"
+          value={form.address}
+          onChange={(e) => setForm({ ...form, address: e.target.value })}
           required
         />
         <input
@@ -173,7 +182,6 @@ export default function FileComplaintPage() {
         <div className="mt-4 rounded-md border border-emerald-200 bg-emerald-50 p-3 text-sm">
           <p>ML detected category: <strong>{result.complaint.category}</strong></p>
           <p>Urgency level: <strong>{result.complaint.urgency}</strong></p>
-          <p>Confidence score: <strong>{result.complaint.confidence}</strong></p>
         </div>
       )}
     </div>

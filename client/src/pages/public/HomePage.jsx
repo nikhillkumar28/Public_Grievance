@@ -71,6 +71,14 @@ export default function HomePage() {
     [user?.role]
   );
 
+  const fileComplaintPath = useMemo(() => {
+    if (!user) return "/login";
+    if (user.role === "citizen") return "/citizen/file-complaint";
+    if (user.role === "authority") return "/authority/dashboard";
+    if (user.role === "admin") return "/admin/dashboard";
+    return "/";
+  }, [user]);
+
   const cards = [
     { label: "Total Complaints", value: overviewData?.totalComplaints || 0 },
     { label: "Pending", value: overviewData?.pending || 0 },
@@ -100,7 +108,7 @@ export default function HomePage() {
               <a href="#trending" className="rounded-md bg-civic-blue px-4 py-3 text-sm font-semibold text-white">
                 View Complaints
               </a>
-              <Link to="/login" className="rounded-md border border-civic-blue px-4 py-3 text-sm font-semibold text-civic-blue">
+              <Link to={fileComplaintPath} className="rounded-md border border-civic-blue px-4 py-3 text-sm font-semibold text-civic-blue">
                 File Complaint
               </Link>
             </div>
@@ -224,7 +232,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-5xl px-6 text-center">
           <h2 className="text-3xl font-bold">Have an issue in your area?</h2>
           <p className="mt-2 text-blue-100">File a complaint and track every status update transparently.</p>
-          <Link to="/login" className="mt-6 inline-block rounded-md bg-white px-5 py-3 text-sm font-semibold text-civic-navy">
+          <Link to={fileComplaintPath} className="mt-6 inline-block rounded-md bg-white px-5 py-3 text-sm font-semibold text-civic-navy">
             File Complaint
           </Link>
         </div>

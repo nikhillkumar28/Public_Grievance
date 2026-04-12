@@ -44,12 +44,10 @@ router.get("/public/impact", getPublicImpact);
 router.get("/public/recent", getPublicRecent);
 router.get("/trending", getTrendingComplaints);
 
-router.use(authMiddleware, authorizeRoles("citizen"));
-
-router.post("/", imageUpload.single("image"), createComplaint);
-router.get("/", listComplaints);
-router.get("/:id", getComplaintById);
-router.patch("/:id/status", updateComplaintStatus);
-router.patch("/:id/upvote", upvoteComplaint);
+router.post("/", authMiddleware, authorizeRoles("citizen"), imageUpload.single("image"), createComplaint);
+router.get("/", authMiddleware, authorizeRoles("citizen", "authority"), listComplaints);
+router.get("/:id", authMiddleware, authorizeRoles("citizen", "authority"), getComplaintById);
+router.patch("/:id/status", authMiddleware, authorizeRoles("authority"), updateComplaintStatus);
+router.patch("/:id/upvote", authMiddleware, authorizeRoles("citizen"), upvoteComplaint);
 
 module.exports = router;

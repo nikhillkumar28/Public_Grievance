@@ -256,12 +256,12 @@ export default function AuthorityDashboard() {
       </section>
 
       <section className="mt-6">
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <h2 className="text-lg font-semibold text-civic-navy">{"\u{1F525}"} High Priority Issues</h2>
-          <p className="text-xs text-slate-500">
-            High urgency, high upvotes (>= {HIGH_UPVOTE_THRESHOLD}), or older than {OLD_COMPLAINT_DAYS} days
-          </p>
-        </div>
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <h2 className="text-lg font-semibold text-civic-navy">{"\u{1F525}"} High Priority Issues</h2>
+            <p className="text-xs text-slate-500">
+              High urgency, high upvotes (≥ {HIGH_UPVOTE_THRESHOLD}), or older than {OLD_COMPLAINT_DAYS} days
+            </p>
+          </div>
 
         {highPriorityComplaints.length === 0 ? (
           <p className="mt-4 text-sm text-slate-600">No high priority issues at the moment.</p>

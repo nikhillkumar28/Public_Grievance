@@ -13,6 +13,7 @@ const authorityRoutes = require("./routes/authorityRoutes");
 const adminRoutes = require("./routes/adminRoutes");
 const advisoryRoutes = require("./routes/advisoryRoutes");
 const analyticsRoutes = require("./routes/analyticsRoutes");
+const userRoutes = require("./routes/userRoutes");
 
 const app = express();
 
@@ -29,6 +30,7 @@ app.use("/api/authority", authorityRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/advisories", advisoryRoutes);
 app.use("/api/analytics", analyticsRoutes);
+app.use("/api/users", userRoutes);
 
 app.use((err, _req, res, _next) => {
   console.error(err);

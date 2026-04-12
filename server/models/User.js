@@ -19,7 +19,8 @@ const userSchema = new mongoose.Schema(
         message: "department is required for authority role"
       }
     },
-    ward: { type: String, trim: true, default: null }
+    ward: { type: String, trim: true, default: null },
+    address: { type: String, trim: true, default: null }
   },
   { timestamps: true }
 );
